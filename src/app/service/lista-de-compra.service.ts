@@ -33,17 +33,21 @@ export class ListaDeCompraService {
     //this.atualizarLocalStorage();
   }
 
-  editarItemDaLista(itemAntigo: Item, nomeEditadoDoItem: string){
-    const itemEditado: Item = {
-      id: itemAntigo.id,
-      nome: nomeEditadoDoItem,
-      data: itemAntigo.data,
-      comprado: itemAntigo.comprado
-    }
-    const id = itemAntigo.id;
-    this.listaDeCompra.splice(Number(id)-1, 1, itemEditado);
-   // this.atualizarLocalStorage();
+ editarItemDaLista(itemAntigo: Item, nomeEditadoDoItem: string){
+  const itemEditado: Item = {
+    id: itemAntigo.id,
+    nome: nomeEditadoDoItem,
+    data: itemAntigo.data,
+    comprado: itemAntigo.comprado
+  };
+
+  const index = this.listaDeCompra.findIndex(item => item.id === itemAntigo.id);
+
+  if (index !== -1) {
+    this.listaDeCompra.splice(index, 1, itemEditado);
+    this.atualizarLocalStorage();
   }
+}
 
   atualizarLocalStorage(){
     localStorage.setItem('itens', JSON.stringify(this.listaDeCompra));

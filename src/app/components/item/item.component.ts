@@ -30,10 +30,12 @@ export class ItemComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   editarItem(){
+    console.log('CLIQUEI EM EDITAR', this.item);
     this.emitindoItemParaEditar.emit(this.item);
   }
 
   alterarStatusItem(){
+    console.log('ALTERANDO STATUS', this.item);
     this.item.comprado = !this.item.comprado;
     this.listaService.atualizarLocalStorage();
   }
